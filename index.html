@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiry AI - Next-Generation AI Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #e5e7eb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .nav-links a.active {
+            color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Page */
+        .hero {
+            text-align: center;
+            padding: 6rem 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            margin: 2rem 0;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #d1d5db;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #d1d5db;
+            line-height: 1.6;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.02);
+            margin: 2rem 0;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section h2 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-content {
+            color: #d1d5db;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .team-member h4 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member .role {
+            color: #8b5cf6;
+            font-size: 0.9rem;
+        }
+
+        /* Resources & News */
+        .resource-grid, .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .resource-item, .news-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .resource-item:hover, .news-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .resource-item h4, .news-item h4 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .resource-item p, .news-item p {
+            color: #d1d5db;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: #8b5cf6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #6366f1;
+        }
+
+        .news-date {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 15, 35, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem 0;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Inspiry AI</a>
+            <ul class="nav-links">
+                <li><a href="#" data-page="home" class="nav-link active">Home</a></li>
+                <li><a href="#" data-page="company" class="nav-link">Company</a></li>
+                <li><a href="#" data-page="resources" class="nav-link">Resources</a></li>
+                <li><a href="#" data-page="news" class="nav-link">News</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <h1>Next-Generation AI Solutions</h1>
+                <p>Empowering businesses with cutting-edge artificial intelligence technology that transforms possibilities into reality.</p>
+                <a href="#" class="cta-button">Get Started</a>
+            </section>
+
+            <section class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Advanced ML Models</h3>
+                    <p>State-of-the-art machine learning models trained on massive datasets to deliver unprecedented performance and accuracy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Optimized for speed with distributed computing infrastructure that scales seamlessly with your business needs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Enterprise Security</h3>
+                    <p>Bank-level security with end-to-end encryption, compliance certifications, and robust data protection protocols.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Company Page -->
+        <div id="company" class="page">
+            <section class="section">
+                <h2>About Inspiry AI</h2>
+                <div class="section-content">
+                    <p>Founded in 2023, Inspiry AI is at the forefront of artificial intelligence innovation. Our mission is to democratize AI technology and make it accessible to businesses of all sizes, enabling them to harness the power of machine learning to drive growth and efficiency.</p>
+                    
+                    <p>We believe that AI should be intuitive, powerful, and ethical. Our team of world-class researchers and engineers work tirelessly to develop solutions that not only push the boundaries of what's possible but also ensure responsible AI deployment across industries.</p>
+                    
+                    <p>From startups to Fortune 500 companies, our clients trust us to deliver AI solutions that transform their operations, enhance customer experiences, and unlock new opportunities for innovation.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-avatar">AS</div>
+                        <h4>Alex Sterling</h4>
+                        <p class="role">CEO & Co-Founder</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar">MC</div>
+                        <h4>Maya Chen</h4>
+                        <p class="role">CTO & Co-Founder</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar">DR</div>
+                        <h4>David Rodriguez</h4>
+                        <p class="role">Head of Research</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar">SP</div>
+                        <h4>Sarah Park</h4>
+                        <p class="role">VP of Engineering</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Resources Page -->
+        <div id="resources" class="page">
+            <section class="section">
+                <h2>Resources</h2>
+                <div class="resource-grid">
+                    <div class="resource-item">
+                        <h4>Getting Started Guide</h4>
+                        <p>A comprehensive guide to help you integrate Inspiry AI into your workflow. Learn the basics and get up and running in minutes.</p>
+                        <a href="#" class="read-more">Read Guide →</a>
+                    </div>
+                    <div class="resource-item">
+                        <h4>API Documentation</h4>
+                        <p>Complete technical documentation for our REST API, including endpoints, parameters, and code examples in multiple languages.</p>
+                        <a href="#" class="read-more">View Docs →</a>
+                    </div>
+                    <div class="resource-item">
+                        <h4>Best Practices</h4>
+                        <p>Learn industry best practices for implementing AI solutions, optimizing performance, and ensuring ethical AI deployment.</p>
+                        <a href="#" class="read-more">Learn More →</a>
+                    </div>
+                    <div class="resource-item">
+                        <h4>Use Case Studies</h4>
+                        <p>Discover how companies across various industries have successfully implemented our AI solutions to solve complex challenges.</p>
+                        <a href="#" class="read-more">Explore Cases →</a>
+                    </div>
+                    <div class="resource-item">
+                        <h4>Webinar Series</h4>
+                        <p>Join our monthly webinars featuring AI experts discussing the latest trends, techniques, and technologies in artificial intelligence.</p>
+                        <a href="#" class="read-more">Register →</a>
+                    </div>
+                    <div class="resource-item">
+                        <h4>Community Forum</h4>
+                        <p>Connect with other developers, share experiences, ask questions, and collaborate on AI projects with our vibrant community.</p>
+                        <a href="#" class="read-more">Join Forum →</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- News Page -->
+        <div id="news" class="page">
+            <section class="section">
+                <h2>Latest News</h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <h4>Inspiry AI Raises $50M Series B Funding</h4>
+                        <p>We're excited to announce our Series B funding round led by Venture Capital Partners, which will accelerate our AI research and expand our global presence.</p>
+                        <div class="news-date">September 15, 2025</div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                    <div class="news-item">
+                        <h4>New Multi-Modal AI Model Released</h4>
+                        <p>Our latest AI model now supports text, image, and audio processing in a unified framework, opening new possibilities for creative applications.</p>
+                        <div class="news-date">September 8, 2025</div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                    <div class="news-item">
+                        <h4>Partnership with Global Tech University</h4>
+                        <p>We've partnered with leading universities worldwide to advance AI research and provide students with hands-on experience using our platform.</p>
+                        <div class="news-date">August 28, 2025</div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                    <div class="news-item">
+                        <h4>AI Ethics Framework Published</h4>
+                        <p>Inspiry AI releases comprehensive guidelines for ethical AI development, setting new industry standards for responsible AI deployment.</p>
+                        <div class="news-date">August 20, 2025</div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                    <div class="news-item">
+                        <h4>Recognition as AI Innovation Leader</h4>
+                        <p>Inspiry AI named as one of the top 10 AI innovation companies by TechCrunch, highlighting our groundbreaking research and development.</p>
+                        <div class="news-date">August 12, 2025</div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                    <div class="news-item">
+                        <h4>New Enterprise Features Launch</h4>
+                        <p>Enhanced security controls, advanced analytics, and custom model training capabilities now available for enterprise customers.</p>
+                        <div class="news-date">July 30, 2025</div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Inspiry AI. All rights reserved. Transforming the future with artificial intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all nav links and pages
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                pages.forEach(page => page.classList.remove('active'));
+                
+                // Add active class to clicked nav link
+                link.classList.add('active');
+                
+                // Show corresponding page
+                const targetPage = link.getAttribute('data-page');
+                document.getElementById(targetPage).classList.add('active');
+            });
+        });
+
+        // Smooth scrolling for CTA button
+        document.querySelector('.cta-button').addEventListener('click', (e) => {
+            e.preventDefault();
+            // You can implement specific functionality here
+            alert('Thank you for your interest! Contact us to get started.');
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(15, 15, 35, 0.98)';
+            } else {
+                header.style.background = 'rgba(15, 15, 35, 0.95)';
+            }
+        });
+
+        // Add hover effects and animations
+        const featureCards = document.querySelectorAll('.feature-card, .resource-item, .news-item, .team-member');
+        
+        featureCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
